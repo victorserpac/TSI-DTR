@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Batman Vs Superman - A Origem da Justiça</title>
+
+    <link rel="stylesheet" href="css/remodal.css">
+    <link rel="stylesheet" href="css/remodal-default-theme.css">
+
+    <style media="screen">
+      body{
+        font-family: sans-serif;
+      }
+      a{
+        color: #E57373;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content remodal-bg">
+      <h1>Sinopse Oficial</h1>
+      <p>Temendo as descontroladas ações de um super-herói quase Deus, o forte e formidável vigilante de Gotham City assume o papel do reverenciado salvador de Metrópolis, enquanto luta para decidir qual tipo de herói o mundo realmente precisa. E enquanto <a data-remodal-target="batman">Batman</a> e <a data-remodal-target="superman">Superman</a> estão em guerra, uma nova ameaça surge rapidamente, colocando a humanidade em um perigo nunca antes conhecido.</p>
+    </div>
+
+
+
+
+    <div class="remodal" data-remodal-id="batman">
+      <button data-remodal-action="close" class="remodal-close"></button>
+      <p>Batman foi criado em 1939 pelo roteirista Bill Finger e pelo desenhista Bob Kane em DetecUve Comics #27, na história "The Case of the Chemical Syndicate". Foi pensado originalmente para ter histórias policialescas pulp e acabou se tornando um símbolo dos vigilantes super-heróicos.</p>
+      <p><img src="images/Batman.jpg" alt=""></p>
+    </div>
+
+    <div class="remodal" data-remodal-id="superman">
+      <button data-remodal-action="close" class="remodal-close"></button>
+      <p>Em 18 de abril de 1938 (data aproximada), chegava às bancas dos EUA a primeira edição de AcUon Comics. Na capa, um homem com roupa de fortão de circo erguia um carro com os braços enquanto homens com cara de desespero saíam correndo. Foi a estreia de Superman, o Homem de Aço.</p>
+      <p><img src="images/Superman.jpg" alt=""></p>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/remodal.min.js"></script>
+
+    <script>
+      $('[data-remodal-id=modal]').remodal();
+    </script>
+  </body>
+</html>
