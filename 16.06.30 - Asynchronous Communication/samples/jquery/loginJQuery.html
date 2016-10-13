@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Teste de login</title>
+	<style type="text/css">
+		body{
+			background-color:#f4decb;
+			font-family: Roboto,Verdana;
+		}
+		.container{
+			color:#fff;
+			background-color: #c76b0d;
+			width:300px;
+			padding:10px;
+		}
+		label{
+			font-size:0.7em;
+			margin:20px 20px 0px 20px;
+			display:block;
+		}
+		input{
+			display:block;
+			margin:0px 20px 20px 20px;
+			width:260px;
+		}
+		button{
+			margin-left:240px;
+			display:block;
+		}
+	</style>
+	<script type="text/javascript" src="jquery-3.0.0.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#btLogin').click(function(){
+				$.ajax({
+			    "type":"POST", 
+			    "url":"testalogin.php", 
+    			"data":'login='+encodeURIComponent($('#login').val())+"&password="+encodeURIComponent($('#pwd').val()), 
+    			"success":function(data){ 
+		    			if(data==="1"){
+		    				alert("logou");
+		    			}else{
+		    				alert("falha ao logar, verifique seu login e senha");
+		    			}
+    			}
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+	<div class="container">
+		<label for="login">login</label>
+		<input type="text" id="login" name="login"/>
+		<label for="senha">senha</label>
+		<input type="password" id="pwd" name="pwd"/>
+		<button id="btLogin">Entrar</button>
+	</div>
+</body>
+</html>

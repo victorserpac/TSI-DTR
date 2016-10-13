@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Teste de login</title>
+	<style type="text/css">
+		body{
+			background-color:#f4decb;
+			font-family: Roboto,Verdana;
+		}
+		.container{
+			color:#fff;
+			background-color: #c76b0d;
+			width:300px;
+			padding:10px;
+		}
+		label{
+			font-size:0.7em;
+			margin:20px 20px 0px 20px;
+			display:block;
+		}
+		input{
+			display:block;
+			margin:0px 20px 20px 20px;
+			width:260px;
+		}
+		button{
+			margin-left:240px;
+			display:block;
+		}
+	</style>
+	<script>
+		window.onload = function(){
+			document.getElementById("btLogin").addEventListener("click",function(){
+				var req;
+		    if (window.XMLHttpRequest) { // Mozilla, Safari, ...
+    		  req = new XMLHttpRequest();
+    		} else if (window.ActiveXObject) { // IE
+	        req = new ActiveXObject("Msxml2.XMLHTTP");
+  		  }
+		    req.onreadystatechange = function(){
+		    	if(req.readyState===4){
+		    		if(req.status===200){
+		    			console.log(req.responseText);
+		    			if(req.responseText==="1"){
+		    				alert("logou");
+		    			}else{
+		    				alert("falha ao logar, verifique seu login e senha");
+		    			}
+		    		}else{
+		    			alert("falha ao acessar o endereço remoto");
+		    		}
+		    	}
+		    };
+
+    		req.open('POST', "testalogin.php");
+				req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    		req.send('login='+encodeURIComponent(document.getElementById('login').value)+"&password="+encodeURIComponent(document.getElementById('pwd').value));
+			});
+		};
+	</script>
+</head>
+<body>
+	<div class="container">
+		<label for="login">login</label>
+		<input type="text" id="login" name="login"/>
+		<label for="senha">senha</label>
+		<input type="password" id="pwd" name="pwd"/>
+		<button id="btLogin">Entrar</button>
+	</div>
+</body>
+</html>
