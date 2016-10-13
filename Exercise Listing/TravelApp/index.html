@@ -1,0 +1,189 @@
+<script>
+
+(function( global ) {
+    'use strict';
+
+    function Fly( args ) {
+        if ( args ) {
+            var code            = args.code || null;
+            var originCity      = args.originCity || null;
+            var destinationCity = args.destinationCity || null;
+            var cost            = args.cost || null;
+            var seats           = fillSeats( args.seats || 0 );
+            var departureDate;
+            var arrivalDate;
+
+            validateDates();
+        }
+
+        function fillSeats( length ) {
+            var seats = {};
+            var i;
+
+            for ( i = 1; i <= length; i++ ) {
+                seats[i] = true;
+            }
+
+            return seats;
+        }
+
+        function validateDates() {
+            departureDate = new Date( args.departureDate ) || null;
+            arrivalDate   = new Date( args.arrivalDate ) || null;
+
+
+            if ( departureDate && arrivalDate ) {
+                var currentDate = new Date();
+
+                if ( currentDate > departureDate ) {
+                    departureDate = null;
+                    arrivalDate = null;
+                    return;
+                }
+
+                if ( departureDate > arrivalDate ){
+                    arrivalDate.setTime( departureDate.getTime() + 24 * 60 * 60 * 1000 );
+                }
+            }
+        }
+
+        this.delay = function( minutes ) {
+            departureDate.setTime( departureDate.getTime() + minutes * 60 * 1000 );
+            arrivalDate.setTime( arrivalDate.getTime() + minutes * 60 * 1000 );
+        }
+
+        this.buy = function( id ) {
+            var seat = id;
+
+            if ( !id ) {
+                for ( var i in seats ) {
+                    if ( seats[i] ) {
+                        seat = i;
+                        console.log(i);
+                        break;
+                    }
+                }
+            }
+
+            if ( seats[seat] ) {
+                seats[seat] = false;
+                return seat;
+            }
+
+            return false;
+        }
+
+        //
+        // Getters
+        //
+
+        this.getOriginCity = function() {
+            return originCity;
+        }
+
+        this.getDestinationCity = function() {
+            return destinationCity;
+        }
+
+        this.getDepartureDate = function() {
+            return departureDate;
+        }
+
+        this.getArrivalDate = function() {
+            return arrivalDate;
+        }
+
+        this.getCost = function() {
+            return cost;
+        }
+
+        this.getSeats = function() {
+            var response = [];
+            response[1] = ' - ';
+
+            for ( var seat in seats ) {
+                response[0] = seat;
+
+                if ( seats[seat] ) {
+                    response[3] = 'Livre';
+                } else {
+                    response[3] = 'Ocupado';
+                }
+
+                console.log( response.join('') );
+            }
+        }
+
+        this.getFreeSeats = function() {
+            var freeSeats = [];
+
+            for ( var seat in seats ) {
+                if ( seats[seat] ) {
+                    freeSeats.push(seat);
+                }
+            }
+
+            return freeSeats;
+        }
+
+        //
+        // Setters
+        //
+
+        this.setCost = function( price ) {
+            if ( price <= 0 ) {
+                price = 1;
+                console.log('Valor informado menor ou igual a 0 (Zero). Nesse caso o valor setado foi de 1,00.');
+            }
+
+            cost = price;
+        }
+
+    }
+
+    global.Fly = Fly;
+
+}( this ));
+
+
+var fly1 = new Fly({
+    code:            330,
+    originCity:      'Porto Alegre - RS',
+    destinationCity: 'Florianópolis - SC',
+    departureDate:   '2016-05-15 16:00',
+    arrivalDate:     '2016-05-30 19:00',
+    cost:            440.40,
+    seats:           10
+});
+
+console.log( fly1 );
+
+// Teste com assentos
+// console.log( fly1.getSeats() );
+// console.log( fly1.getFreeSeats() );
+
+// Teste com preço
+// console.log( fly1.getCost() );
+// fly1.setCost( 330 );
+// fly1.setCost( 0 );
+// console.log( fly1.getCost() );
+
+// Teste com atraso
+console.log( fly1.getDepartureDate() );
+console.log( fly1.getArrivalDate() );
+// fly1.delay(80);
+// console.log( fly1.getDepartureDate() );
+// console.log( fly1.getArrivalDate() );
+
+// Teste com compra
+// fly1.getSeats();
+// console.log( fly1.buy(3) );
+// console.log( fly1.buy() );
+// console.log( fly1.buy() );
+// console.log( fly1.buy() );
+// console.log( fly1.buy() );
+// console.log( fly1.buy() );
+// console.log( fly1.buy() );
+// console.log( fly1.buy() );
+// fly1.getSeats();
+</script>

@@ -1,0 +1,139 @@
+<script>
+
+(function( global ) {
+    'use strict';
+
+    function Car( args ) {
+        var _this = this;
+
+        if ( !args ) {
+            args       = {};
+            args.model = randModel();
+            args.color = randColor();
+            args.year  = randYear();
+        }
+
+        this.model = setModel( args.model );
+        this.color = setColor( args.color );
+        this.year  = setYear( args.year );
+
+        function setModel( model ) {
+            if ( _this.models.indexOf( model ) < 0 ) {
+                return _this.models[ 0 ];
+            }
+
+            return model;
+        }
+
+        function setColor( color ) {
+            if ( _this.colors.indexOf( color ) < 0 ) {
+                return _this.colors[ 0 ];
+            }
+
+            return color;
+        }
+
+        function setYear( year ) {
+            if ( year >= 2000 && year <= 2016) {
+                return year;
+            }
+
+            return 2016;
+        }
+
+        function randModel() {
+            return _this.models[ Math.floor( Math.random() * _this.models.length ) ];
+        }
+
+        function randColor() {
+            return _this.colors[ Math.floor( Math.random() * _this.colors.length ) ];
+        }
+
+        function randYear() {
+            return Math.floor( Math.random() * 16 + 2000 )
+        }
+    }
+
+    Car.prototype.models = [
+        'Uno',
+        'Palio',
+        '500',
+        'Ecosport',
+        'Fiesta',
+        'Focus',
+        'Classic',
+        'Spin',
+        'Golf',
+        'Fusca'
+    ];
+
+    Car.prototype.colors = [
+        'red',
+        'black',
+        'blue',
+        'white',
+        'yellow',
+        'gray'
+    ];
+
+    Car.prototype.display = function() {
+        console.log(
+            'Modelo: ' + this.model + '\n' +
+            'Cor: ' + this.color + '\n' +
+            'Ano: ' + this.year
+        );
+    };
+
+    Car.prototype.addModel = function( model ) {
+        this.models.push( model );
+
+        return this;
+    }
+
+    Car.prototype.addColor = function( color ) {
+        this.colors.push( color );
+
+        return this;
+    }
+
+    Car.prototype.removeModel = function( model ) {
+        var index = this.models.indexOf( model );
+
+        if ( index != -1 ) {
+            this.models.splice( index, 1 );
+        }
+
+        return this;
+    }
+
+    Car.prototype.removeColor = function( color ) {
+        var index = this.colors.indexOf( color );
+
+        if ( index != -1 ) {
+            this.colors.splice( index, 1 );
+        }
+
+        return this;
+    }
+
+    global.Car = Car;
+
+}( this ));
+
+
+
+
+var car1 = new Car();
+
+console.log( car1 );
+car1.display();
+
+
+console.log( car1.models );
+// car1.addModel( 'teste' );
+// car1.removeModel( 'Golf' );
+// car1.addColor( 'Teste' );
+// car1.removeColor( 'yellow' );
+console.log( car1.colors );
+
+</script>

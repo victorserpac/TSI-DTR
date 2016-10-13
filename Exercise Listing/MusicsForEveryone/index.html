@@ -1,0 +1,475 @@
+<script>
+
+(function( global ) {
+    'use strict';
+
+    /**
+    * Music contructor
+    * @param {object} args Music arguments
+    */
+    function Music( args ) {
+        if ( args ) {
+            this.name     = args.name || null;
+            this.artist   = args.artist || null;
+            this.album    = args.album || null;
+            this.duration = args.duration || null;
+            this.track    = args.track || null;
+            this.playing  = false;
+        }
+    }
+
+    Music.prototype.play = function() {
+        this.playing = true;
+        console.log( 'Tocando a música ' + this.name );
+
+        return this;
+    };
+
+    Music.prototype.pause = function() {
+        this.playing = false;
+
+        return this;
+    };
+
+
+    /**
+     * Playlist constructor
+     * @param {string} name Playlist name
+     */
+    function Playlist( name ) {
+        this.name = name || 'No name';
+        this.musics = [];
+        this.currentMusic = null;
+    }
+
+    Playlist.prototype.numberOfMusics = function() {
+        return this.musics.length;
+    }
+
+    Playlist.prototype.getMusic = function( i ) {
+        if ( this.hasMusic( i ) ) {
+            return this.musics[ i - 1 ];
+        }
+
+        return null;
+    }
+
+    Playlist.prototype.showPlaylist = function(){
+        if ( !this.hasMusics() ) {
+            console.log( 'Playlist vazia' );
+        } else {
+            var length = this.numberOfMusics();
+
+            for ( var i = 1; i <= length; i++ ) {
+                if ( this.hasMusic( i ) ) {
+                    console.log( i + ': ' + this.getMusic( i ).name );
+                }
+            }
+        }
+
+        return this;
+    };
+
+    Playlist.prototype.addMusic = function( music ) {
+        this.musics.push( music );
+
+        return this;
+    }
+
+    Playlist.prototype.hasMusic = function( i ) {
+        if ( this.musics[i - 1] ) {
+            return true;
+        }
+
+        return false
+    }
+
+    Playlist.prototype.removeMusic = function( i ) {
+        if ( this.hasMusic( i ) ) {
+            this.musics.splice( i - 1, 1 );
+        }
+
+        if ( this.getCurrentMusic() === i) {
+            this.setCurrentMusic( null );
+        }
+
+        return this;
+    }
+
+    Playlist.prototype.getCurrentMusic = function() {
+        return this.currentMusic;
+    }
+
+    Playlist.prototype.setCurrentMusic = function( i ) {
+
+        if ( this.hasMusic( this.currentMusic ) ) {
+            this.getMusic( this.currentMusic ).pause();
+        }
+
+        this.currentMusic = i;
+
+        if ( this.hasMusic( this.currentMusic ) ) {
+            this.getMusic( this.currentMusic ).play();
+        }
+
+        return this;
+    }
+
+    Playlist.prototype.hasMusics = function() {
+        if ( this.musics.length > 0 ){
+            return true;
+        }
+
+        return false;
+    }
+
+    Playlist.prototype.play = function() {
+        if ( this.hasMusics() ){
+            var currentMusic = this.getCurrentMusic();
+
+            if ( !currentMusic ) {
+                this.setCurrentMusic( 1 );
+            } else {
+                this.getMusic( currentMusic ).play();
+            }
+        }
+
+        return this;
+    }
+
+    Playlist.prototype.pause = function() {
+        if ( this.hasMusics() ){
+            var currentMusic = this.getCurrentMusic();
+
+            if ( currentMusic ) {
+                this.getMusic( currentMusic ).pause();
+            }
+        }
+
+        return this;
+    }
+
+    Playlist.prototype.next = function() {
+        if ( this.hasMusics() ){
+            var currentMusic = this.getCurrentMusic();
+
+            if ( !currentMusic ) {
+                this.setCurrentMusic( 1 );
+            } else {
+                var nextMusic = currentMusic + 1;
+
+                if ( currentMusic === this.numberOfMusics() ) {
+                    nextMusic = 1;
+                }
+
+                this.setCurrentMusic( nextMusic );
+            }
+        }
+
+        return this;
+    }
+
+    Playlist.prototype.previous = function() {
+        if ( this.hasMusics() ){
+            var currentMusic = this.getCurrentMusic();
+
+            if ( !currentMusic ) {
+                this.setCurrentMusic( this.numberOfMusics() );
+            } else {
+                var previousMusic = currentMusic - 1;
+
+                if ( currentMusic === 1 ) {
+                    previousMusic = this.numberOfMusics();
+                }
+
+                this.setCurrentMusic( previousMusic );
+            }
+        }
+
+        return this;
+    }
+
+    /**
+     * Player Contructor
+     */
+    function Player() {
+        this.playlists = [];
+        this.selectedPlaylist = null;
+    }
+
+    Player.prototype.addPlaylist = function( playlist ) {
+        this.playlists.push( playlist );
+
+        return this;
+    }
+
+    Player.prototype.hasPlaylists = function() {
+        if ( this.playlists.length > 0 ){
+            return true;
+        }
+
+        return false;
+    }
+
+    Player.prototype.hasPlaylist = function( i ) {
+        if ( this.playlists[i - 1] ) {
+            return true;
+        }
+
+        return false
+    }
+
+    Player.prototype.numberOfPlaylists = function() {
+        return this.playlists.length;
+    }
+
+    Player.prototype.getPlaylist = function( i ) {
+        if ( this.hasPlaylist( i ) ) {
+            return this.playlists[ i - 1 ];
+        }
+
+        return null;
+    }
+
+    Player.prototype.showPlaylists = function() {
+        if ( this.hasPlaylists() ) {
+            var len = this.numberOfPlaylists();
+
+            for ( var i = 1; i <= len; i++ ) {
+                console.log( i + ': ' + this.getPlaylist( i ).name );
+            }
+        }
+
+        return this;
+    }
+
+    Player.prototype.selectPlaylist = function( i ) {
+        if ( this.hasPlaylist( i ) ) {
+            this.selectedPlaylist = i;
+        }
+
+        return this;
+    }
+
+    Player.prototype.getSelectedPlaylist = function() {
+        if ( this.selectedPlaylist ) {
+            return this.getPlaylist( this.selectedPlaylist );
+        }
+
+        return this;
+    }
+
+    Player.prototype.removePlaylist = function( index ) {
+        if ( this.hasPlaylist( index ) ) {
+            this.playlists.splice( index - 1, 1);
+        }
+
+        return this;
+    }
+
+    Player.prototype.play = function() {
+        this.getSelectedPlaylist().play();
+
+        return this;
+    }
+
+    Player.prototype.pause = function() {
+        this.getSelectedPlaylist().pause();
+
+        return this;
+    }
+
+    Player.prototype.next = function() {
+        this.getSelectedPlaylist().next();
+
+        return this;
+    }
+
+    Player.prototype.previous = function() {
+        this.getSelectedPlaylist().previous();
+
+        return this;
+    }
+
+    global.Music = Music;
+    global.Playlist = Playlist;
+    global.Player = Player;
+
+}( this ));
+
+
+
+
+
+var music1 = new Music({
+    name: 'Shadow of the Day',
+    artist: 'Linkin Park',
+    album: 'Minutes to Midnight',
+    duration: '4:50',
+    track: 5
+});
+var music2 = new Music({
+    name: 'Numb',
+    artist: 'Linkin Park',
+    album: 'Meteora',
+    duration: '3:08',
+    track: 13
+});
+var music3 = new Music({
+    name: 'Crawling',
+    artist: 'Linkin Park',
+    album: 'Hybrid Theory',
+    duration: '3:29',
+    track: 5
+});
+var music4 = new Music({
+    name: 'Iridescent',
+    artist: 'Linkin Park',
+    album: 'A Thousands Suns',
+    duration: '4:57',
+    track: 12
+});
+var music5 = new Music({
+    name: 'Lost in The Echo',
+    artist: 'Linkin Park',
+    album: 'Living Things',
+    duration: '3:25',
+    track: 1
+});
+var music6 = new Music({
+    name: 'Guilty All the Same',
+    artist: 'Linkin Park',
+    album: 'The Hunting Party',
+    duration: '5:54',
+    track: 3
+});
+
+var music7 = new Music({
+    name: 'Have You Ever Seen The Rain?',
+    artist: 'Creedence Clearwater Revival',
+    album: 'Pendulum',
+    duration: '2:39',
+    track: 4
+});
+var music8 = new Music({
+    name: 'Demons',
+    artist: 'Imagine Dragons',
+    album: 'Night Visions',
+    duration: '2:56',
+    track: 4
+});
+var music9 = new Music({
+    name: 'Sweet Child O\' Mine',
+    artist: 'Guns N\' Roses',
+    album: 'Appetite for Destruction',
+    duration: '5:56',
+    track: 9
+});
+
+// Play and Pause
+// music1.play().pause();
+
+
+var playlist = new Playlist( 'Linkin Park' );
+var playlist2 = new Playlist( 'Musics to study Javascript' );
+
+playlist2
+    .addMusic( music7 )
+    .addMusic( music8 )
+    .addMusic( music9 )
+    .addMusic( music4 )
+
+// Playlist Add Music
+playlist
+    .addMusic( music1 )
+    .addMusic( music2 )
+    .addMusic( music3 )
+    .addMusic( music4 )
+    .addMusic( music5 )
+    .addMusic( music6 );
+// playlist.showPlaylist();
+
+// Playlist remove Music
+// playlist.showPlaylist();
+// playlist.removeMusic( 1 );
+
+// Playlist Current Music
+// console.log( playlist.getCurrentMusic() );
+// playlist.setCurrentMusic( 1 );
+// console.log( playlist.getCurrentMusic() );
+
+// Playlist Play
+// console.log(playlist);
+// playlist
+//     .play()
+//     .pause()
+//     .play()
+//     .pause()
+//     .play()
+//     .next()
+//     .next()
+//     .next()
+//     .next()
+//     .next()
+//     .next()
+//     .previous()
+//     .previous()
+//     .previous()
+//     .previous()
+//     .previous()
+//     .previous()
+//     .previous()
+// console.log(playlist);
+
+
+// Player
+var player = new Player();
+player
+    .addPlaylist(playlist)
+    .addPlaylist(playlist2)
+    .showPlaylists();
+
+// Remove Player
+// player
+//     .removePlaylist( 1 )
+//     .showPlaylists();
+// console.log( player );
+
+// Select Playlist
+player
+    .selectPlaylist( 1 );
+// console.log( player );
+
+player
+    .play()
+    .next()
+    .pause()
+    .play()
+    .previous()
+    .next()
+    .next()
+    .next();
+
+
+
+console.log('\nNova Playlist tocando agora\n\n');
+
+player
+    .selectPlaylist( 2 );
+
+    player
+        .play()
+        .next()
+        .pause()
+        .play()
+        .previous()
+        .next()
+        .next()
+        .next()
+        .next();
+
+
+console.log(playlist);
+console.log(playlist2);
+
+</script>

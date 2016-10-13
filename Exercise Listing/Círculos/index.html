@@ -1,0 +1,89 @@
+<script>
+
+(function( global ) {
+    'use strict';
+
+    function Circle( args ) {
+        if ( args ) {
+            this.color  = args.color || null;
+            this.radius = args.radius || null;
+            var x       = args.x || null;
+            var y       = args.y || null;
+        }
+
+        this.getPosition = function() {
+            return {
+                x: x,
+                y: y
+            };
+        }
+
+        this.setPosition = function( _x, _y ) {
+            x = _x;
+            y = _y;
+        }
+
+        this.moveRight = function( pixels ) {
+            x += pixels || 1;
+        }
+
+        this.moveLeft = function( pixels ) {
+            x -= pixels || 1;
+        }
+
+        this.moveUp = function( pixels ) {
+            y += pixels || 1;
+        }
+
+        this.moveDown = function( pixels ) {
+            y -= pixels || 1;
+        }
+
+        this.status = function() {
+            return {
+                x:      x,
+                y:      y,
+                color:  this.color,
+                radius: this.radius
+            };
+        }
+    }
+
+    Circle.prototype.increase = function() {
+
+        // Increase 10% of radius;
+        this.radius += this.radius * 0.1;
+        return this;
+    }
+
+    Circle.prototype.decrease = function() {
+
+        // Decrease 10% of radius;
+        this.radius -= this.radius * 0.1;
+        return this;
+    }
+
+    Circle.prototype.getArea = function() {
+        return Math.PI * Math.pow( this.radius, 2 );
+    }
+
+    Circle.prototype.getPerimeter = function() {
+        return 2 * Math.PI * this.radius;
+    }
+
+    global.Circle = Circle;
+
+}( this ));
+
+var MyApp = {};
+
+MyApp.ball = new Circle({
+    color:  '#ff0',
+    radius: 3,
+    x:      2,
+    y:      1
+});
+
+
+
+</script>
