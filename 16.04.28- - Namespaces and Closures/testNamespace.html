@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>testeNamespace.html</title>
+</head>
+<body>
+	<script>
+		var MYAPP = {};
+		MYAPP.Container = function(parametro){
+			this.attrPublico=parametro;
+			var attrPrivado=parametro;
+			this.metodoPrivilegiado = function(){
+				console.log("attrPublico chamado a partir de metodoPrivilegiado: "+this.attrPublico);
+				console.log("attrPrivado chamado a partir de metodoPrivilegiado: "+attrPrivado);
+			};
+		};
+		MYAPP.Container.prototype.metodoPublico = function(){
+			console.log("attrPublico chamado a partir de metodoPublico: "+this.attrPublico);
+			console.log("attrPrivado chamado a partir de metodoPublico: "+this.attrPrivado);
+		};
+		MYAPP.containerInstance = new MYAPP.Container("teste");
+		MYAPP.containerInstance.metodoPrivilegiado();
+		MYAPP.containerInstance.metodoPublico();
+	</script>
+</body>
+</html>

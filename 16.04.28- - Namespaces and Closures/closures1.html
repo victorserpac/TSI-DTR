@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Closures</title>
+</head>
+<body>
+	<script>
+		function iniciarContador() {
+			var contador = 0;
+			function contar() {
+				contador = contador+1;
+				return contador;
+			}
+			return contar;
+		}
+
+		var cont1 = iniciarContador();
+		var cont2 = iniciarContador();
+		console.log("Chamei cont1 - "+cont1());
+		console.log("Chamei cont1 - "+cont1());
+		console.log("Chamei cont2 - "+cont2());
+		console.log("Chamei cont1 - "+cont1());
+	</script>
+</body>
+</html>

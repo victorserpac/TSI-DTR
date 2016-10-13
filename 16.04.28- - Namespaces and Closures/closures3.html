@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Closures</title>
+</head>
+<body>
+	<script>
+		function construtorUsuario(){//closure que encapsula o construtor de usuários
+			var idUser=0;
+
+			var construtor = function(nome,senha){//a função construtora de usuários :)
+				this.nome = nome;
+				this.senha = senha;
+				this.id = idUser;
+				idUser=idUser+1;
+			};
+			//métodos (publicos) que compoe um objeto usuário
+			construtor.prototype.testarSenha = function(senha){
+				if (senha===this.senha){
+					return true;
+				}
+				return false;
+			};
+
+			construtor.prototype.apresentar = function(){
+				console.log("Olá, meu nome é "+ this.nome);
+			};
+
+			construtor.prototype.getId = function(){
+				return this.id;
+			};
+
+			construtor.prototype.getNome = function(){
+				return this.nome;
+			};
+
+			return construtor;//retorna o construtor do usuário;
+		}
+
+		//criamos o construtor de usuários que será chamado a partir de Usuario
+		var Usuario = construtorUsuario();
+
+		//alguns exemplos de instanciação
+		var user1 = new Usuario("João","xyz");
+		var user2 = new Usuario("Glederson","abc");
+
+		//chamando os métodos dos objetos instanciados
+		user1.apresentar();
+		user2.apresentar();
+		console.log(user1.testarSenha("abc"));
+		console.log(user1.testarSenha("xyz"));
+		console.log(user1.getId()+" - "+user1.getNome());
+		console.log(user2.getId()+" - "+user2.getNome());
+		var user3 = new Usuario("Joaquim","qwe");
+		console.log(user3.getId()+" - "+user3.getNome());
+	</script>
+</body>
+</html>
