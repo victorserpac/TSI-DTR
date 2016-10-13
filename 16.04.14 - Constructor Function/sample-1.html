@@ -1,0 +1,42 @@
+<script>
+
+    /**
+     * Class Pessoa
+     *
+     * @param {[type]} nome      [description]
+     * @param {[type]} sobrenome [description]
+     * @param {[type]} email     [description]
+     */
+    function Pessoa(args) {
+        this.nome = args.nome;
+        this.sobrenome = args.sobrenome;
+        this.email = args.email;
+
+
+        this.apresentar = function() {
+            console.log('Olá, meu nome é '+ this.nome +' '+ this.sobrenome +' e meu email é '+ this.email +'.');
+        }
+    }
+
+    var p1 = new Pessoa({
+        nome: 'Victor',
+        sobrenome: 'Serpa do Carmo',
+        email: 'victor.serpa.c@icloud.com',
+    });
+
+    p1.apresentar();
+
+    /*
+        Erro gerado pela falta do "new". o "this" se refere ao objeto global
+        "window" e os atributos e parâmetros são criados lá neste objeto.
+
+        var p2 = Pessoa({
+            nome: 'Victor',
+            sobrenome: 'Serpa do Carmo',
+            email: 'victor.serpa.c@icloud.com',
+        });
+
+        console.log(this);
+    */
+
+</script>

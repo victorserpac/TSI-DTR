@@ -1,0 +1,29 @@
+<script>
+    function Container(parametro) {
+        this.attrPublico = parametro;
+        var attrPrivado = parametro;
+
+        this.eu = function() {
+            console.log(this.attrPublico);
+            console.log(attrPrivado);
+        };
+    }
+    /*
+        Primeira bateria de testes
+
+        var cont = new Container(5);
+        console.log(cont);
+        console.log(cont.attrPublico);
+        console.log(cont.attrPrivado);
+        cont.eu();
+    */
+
+    Container.prototype.eu2 = function() {
+        console.log(this.attrPublico);
+        console.log(this.attrPrivado);
+    }
+
+    var cont2 = new Container(5);
+    cont2.eu();
+    cont2.eu2();
+</script>

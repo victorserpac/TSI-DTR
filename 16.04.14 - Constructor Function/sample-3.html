@@ -1,0 +1,30 @@
+<script>
+    function Pessoa(nome, sobrenome) {
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+    }
+
+    Pessoa.prototype = {
+        constructor: Pessoa,
+        get nomeCompleto(){
+            return this.nome +  " " + this.sobrenome;
+        },
+        set nomeCompleto(fullname) {
+            var names = fullname.split(" ");
+            var len = names.length;
+            this.nome = names[0];
+            this.sobrenome = names[1];
+
+            for (var i=2; i < len; i++) {
+                this.sobrenome += " " + names[i];
+            }
+        }
+    }
+
+    var p = new Pessoa;
+
+
+    p.nomeCompleto = 'teste da silva';
+
+    console.log(p);
+</script>
