@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body{
+			font-family: Roboto;
+		}
+
+		section{
+			width:200px;
+			height: 300px;
+			border-radius: 10px;
+			color:#fff;
+			float:left;
+			margin-left:5px;
+			margin-right:15px;
+		}
+
+		h2{
+			font-size:2em;
+			padding-left: 30px;
+		}
+
+		#lista1{
+			background-color: #CE5250;
+		}
+		#lista2{
+			background-color: #6395EC;
+		}
+		ul{
+			padding: 0;
+			margin: 0;
+		}
+
+		li{
+			list-style: none;
+			padding:8px 12px;
+		}
+		h3{
+			padding:8px 12px;
+		}
+	</style>
+</head>
+<body>
+	<h2>Lista de Compras</h2>
+	<section id="lista1">
+	<h3>Pendentes</h3>
+	<ul>
+		<li>Tomate</li>
+		<li>Melão</li>
+		<li>Mamão</li>
+		<li>Ovos</li>
+		<li>Leite</li>
+	</ul>
+	</section>
+	<section id="lista2">
+	<h3>Comprados</h3>
+	<ul></ul>
+	</section>
+	<script>
+		var elements=document.querySelectorAll("#lista1>ul>li");
+		for (var i =0;i<elements.length;i++){
+			elements[i].addEventListener("click",function(){
+				document.getElementById("lista2").appendChild(this);
+			});
+		}
+	</script>
+</body>
+</html>

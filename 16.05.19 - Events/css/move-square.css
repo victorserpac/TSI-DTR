@@ -1,0 +1,24 @@
+/**
+ * Moove Square
+ * =====================================================================
+*/
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to left, #fd746c, #ff9068);
+}
+
+.square {
+    position: absolute;
+    /*left: 200px;*/
+    width: 150px;
+    height: 150px;
+    background-color: rgba(68, 68, 68, 0.8);
+}

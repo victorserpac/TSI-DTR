@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		nav{
+			font-family: "Roboto";
+			font-size: 18px;
+			color:#298C41;
+		}
+		nav div span{
+			margin:0;
+			padding-left: 16px;
+			cursor: pointer;
+		}
+
+		nav div ul{
+			margin: 0;
+	    list-style: none;
+	    padding-left: 20px;
+		}
+
+		.menuFechado span{
+			background: url(fechado.png) no-repeat left center;			
+		}
+
+		.menuFechado ul{
+			display:none;
+		}
+
+		.menuAberto span{
+			background: url(aberto.png) no-repeat left center;			
+		}
+
+		.menuAberto ul{
+			display:block;
+		}
+		
+	</style>
+</head>
+<body>
+	<nav>
+		<div class="menuFechado">
+			<span id="item1">Item 1</span>
+			<ul>
+				<li>Subitem 1</li>
+				<li>Subitem 2</li>
+				<li>Subitem 3</li>
+			</ul>
+		</div>
+	</nav>
+
+	<script type="text/javascript">
+		document.getElementById("item1").addEventListener("click",function(){
+/*			if(this.parentNode.className == "menuFechado"){
+				this.parentNode.className = "menuAberto";
+			}else{
+				this.parentNode.className = "menuFechado";
+			}*/
+			if(this.parentNode.getAttribute("class") == "menuFechado"){
+				this.parentNode.setAttribute("class","menuAberto");
+			}else{
+				this.parentNode.setAttribute("class","menuFechado");
+			}
+		});
+	</script>
+</body>
+</html>

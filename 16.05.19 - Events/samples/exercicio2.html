@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	<p id="teste">
+	Crie uma página composta por um botão e um parágrafo. Quando o botão é clicado o parágrafo some
+	</p>
+	<button>Suma</button>
+	<script type="text/javascript">
+		var p=document.getElementById("teste");
+		document.querySelector("button").addEventListener("click",function(){
+				var p=document.getElementById("teste");
+				if(p.style.visibility=="hidden"){
+					this.innerHTML="Suma";
+					p.style.visibility="visible";
+				}else{
+					p.style.visibility="hidden";
+					this.innerHTML="Apareça";
+				}
+		});
+	</script>
+</body>
+</html>

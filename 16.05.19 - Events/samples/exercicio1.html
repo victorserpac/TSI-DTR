@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	<p id="teste">
+	Crie uma página composta por um botão e um parágrafo. Quando o botão é clicado o parágrafo some
+	</p>
+	<button>Suma</button>
+	<script type="text/javascript">
+		document.querySelector("button").addEventListener("click",function(){
+				var p=document.getElementById("teste");
+				if(p){
+					this.parentNode.removeChild(p);
+				}
+		});
+	</script>
+</body>
+</html>
