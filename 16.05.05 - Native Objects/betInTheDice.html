@@ -1,0 +1,44 @@
+<script>
+/**
+ * ==> Crie o programa aposte_no_dado, onde a pessoa digita um número entre 1 e 6 e
+ * o sistema, com o auxílio da função random, “sorteia” um número dentro do
+ * conjunto [1,6] verificando se a pessoa apostou no número correto.
+ * ==> Caso o número apostado seja escolhido, o sistema apresenta uma frase
+ * dizendo que a pessoa venceu.
+ * ==> Caso contrário, diz qual o número sorteado, informando que a pessoa
+ * perdeu a aposta.
+ */
+
+
+(function(t) {
+    'use strict';
+
+    console.log(t);
+    console.log(window);
+
+    function RollingDices() {
+        var randNum;
+
+        this.rand = function() {
+            randNum = Math.floor( Math.random() * 6 + 1 );
+        }
+
+        this.result = function( number ) {
+            if (randNum === Number( number )) {
+                return 'Você venceu';
+            }
+
+            return 'Você perdeu! Número sorteado: ' + randNum;
+        }
+    }
+
+    var choice = prompt( 'Sujestão' );
+
+    var game1 = new RollingDices();
+
+    game1.rand();
+
+    alert( game1.result( choice ) );
+}(window));
+
+</script>

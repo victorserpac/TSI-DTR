@@ -1,0 +1,41 @@
+<script>
+/**
+ * ==> Elabore um programa que solicita um número indeterminado de nomes a
+ * partir de prompt.
+ * ==> Após, o programa deverá imprimir os nomes com a maior e menor quantidade
+ * de caracteres e o número de caracteres de cada um.
+ */
+
+(function() {
+    'use strict';
+
+    var keepOn;
+    var names = [];
+    var lengths = [];
+
+    do {
+        var name = prompt( 'Nome: ' );
+
+        names.push( name );
+
+        keepOn = confirm('Adicionar outro nome?');
+    } while( keepOn );
+
+
+    names.sort(function(a, b) {
+        if (a.length > b.length) {
+            return 1;
+        } else if (a.length < b.length) {
+            return -1
+        }
+
+        return 0;
+    });
+
+    console.log('Menor nome: ' + names[0] + '(' + names[0].length + ')');
+    console.log('Maior nome: ' + names[names.length-1] + '(' + names[names.length-1].length + ')');
+
+
+}());
+
+</script>
