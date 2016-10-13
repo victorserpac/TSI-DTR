@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		var context;
+		var i=0;
+		var intervalo;
+		var numpontos=10000;
+		function criaPonto(){
+			var _x = parseInt(Math.random()*800);
+			var _y = parseInt(Math.random()*600);
+			var raio = parseInt(12*(numpontos-i)/numpontos+2);
+			if(i++ >= numpontos){
+				clearInterval(intervalo);
+				console.log("Trabalho finalizado. Desenho feito com "+numpontos+" pontos.");
+			}
+			var canvas = document.getElementById("tela");
+			data = context.getImageData(_x, _y, 1, 1).data;
+			var ctx=canvas.getContext("2d");
+			ctx.fillStyle = "rgb("+data[0]+","+data[1]+","+data[2]+")";
+			ctx.beginPath();
+		  ctx.arc(_x, _y, raio, 0, 2 * Math.PI);
+  		ctx.fill();
+		}
+		function createEvent(){
+			var myImg = new Image();
+			var arrayImg = ['borboletas','carro','carro2','cobra','golfinhos','leao','leao2','lobos','lobos2'];
+			var numImg=Math.floor(Math.random()*arrayImg.length);
+			myImg.src = 'img/'+arrayImg[numImg]+".jpg";
+			myImg.onload = function(){
+				mycanvas = document.createElement('canvas');
+				mycanvas.setAttribute('width',800);
+				mycanvas.setAttribute('height',600);
+				context = mycanvas.getContext('2d');
+				//context = document.getElementById('imgTela').getContext('2d');
+				context.drawImage(myImg, 0, 0);
+				intervalo = setInterval(criaPonto,10);
+			};	
+		}
+		window.addEventListener("load",createEvent);
+	</script>
+</head>
+<body>
+	<canvas id="tela" width="800" height="600" style="border:1px solid #000000;">
+	</canvas>
+</body>
+</html>

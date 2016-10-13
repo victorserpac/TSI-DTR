@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<ul id="lista1">
+		<li>Carlos</li>
+		<li>João</li>
+		<li>Maurício</li>
+		<li>Ana</li>
+		<li>Paulo</li>
+		<li>Gertrudes</li>
+		<li>Camila</li>
+		<li>Roberta</li>
+		<li>Gustavo</li>
+		<li>Maria</li>
+		<li>Tadeu</li>
+	</ul>
+	<button id="orderBt">Organizar</button>
+	<script type="text/javascript">
+		window.onload = function(){
+			document.getElementById("orderBt").addEventListener("click",function(){
+				var liveLI = document.getElementById("lista1").getElementsByTagName("li");
+				var copyLI = [];
+				for (var i = 0; i < liveLI.length; i ++) {// A cópia é feita para um aumento de performance
+					copyLI.push(liveLI[i]);
+				}
+				console.log(copyLI);
+				copyLI.sort(function(li1,li2){
+					if(li1.innerHTML.toUpperCase()>li2.innerHTML.toUpperCase()){
+						return 1;
+					}else{
+						return -1;
+					}
+				});
+				console.log(copyLI);
+				for (i = 0; i < copyLI.length; i ++) { //readiciona todos os elementos (agora ordenados) de forma a organizar o código
+					copyLI[i].parentNode.appendChild(copyLI[i]);
+				}
+			});
+		};
+	</script>
+</body>
+</html>
