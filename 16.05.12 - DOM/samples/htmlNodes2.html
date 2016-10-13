@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Nodos HTML</title>
+  </head>
+  <body>
+    <p>Uma página muito simples</p>
+    <script>
+      var controleCount=0;
+      (function printDOM(node, prefix) {
+        controleCount++;
+        if(node.nodeType==document.TEXT_NODE){
+          console.log(prefix + node.nodeName + "-"+node.nodeType+":"+node.nodeValue);
+        }else{
+          console.log(prefix + node.nodeName + "-"+node.nodeType);
+        }
+        for(var i=0; i<node.childNodes.length; i++) {
+            printDOM(node.childNodes[i], prefix + '\t');
+        }
+      })(document.body,'');
+      console.log("Total de elementos:"+controleCount);
+    </script>
+  </body>
+</html>
