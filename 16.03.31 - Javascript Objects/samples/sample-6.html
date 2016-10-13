@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Exemplo 6</title>
+    </head>
+    <body>
+
+        <script>
+            var a = ["morango", "laranja"];
+
+            alert(a.length);
+
+            a[10] = "banana";
+
+            alert(a.length);
+            alert(a[7]);
+
+            var len=a.length;
+
+            // Percorre os elementos
+            for (var i=0;i<len;i++){
+                console.log(a[i]);
+                console.log(i);
+            }
+
+            // Percorre os elementos que não são "undefined"
+            for (var i in a){
+                console.log(a[i]);
+                console.log(i);
+            }
+        </script>
+
+    </body>
+</html>

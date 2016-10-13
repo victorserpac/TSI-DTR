@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exemplo 1</title>
+</head>
+<body>
+    <script>
+
+        var scope = "global";
+
+        function f() {
+            console.log(scope);
+            var scope = "local";
+
+            console.log(scope);
+        }
+
+        f();
+    </script>
+</body>
+</html>

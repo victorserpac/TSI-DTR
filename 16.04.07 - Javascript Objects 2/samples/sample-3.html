@@ -1,0 +1,22 @@
+<script>
+    var Pessoa = {
+        nome: 'Victor',
+        sobrenome: 'Serpa do Carmo',
+    };
+    var pFisica = {
+        cpf: '99.999.999-99',
+    };
+
+    console.log(Pessoa);
+    console.log(pFisica);
+
+    extend(pFisica, Pessoa);
+
+    console.log(pFisica);
+
+    function extend(o, p) {
+        for (var prop in p) {
+            o[prop] = p[prop];
+        }
+    }
+</script>
